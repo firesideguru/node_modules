@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--
+ PARSER LOGIC AND ALL CODE CREATED BY
+ Kevin Douglas <kdouglas@satarah.com>
+ Copyright (C) 2011, Kevin A. Douglas
+ -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Parser About</title>
+<style type="text/css">
+body {
+  font-family: Georgia;
+}
+
+code {
+  color: blue;
+}
+
+a {
+  color: red;
+  text-decoration: none;
+}
+
+a:hover {
+  color: orange;
+}
+</style>
+</head>
+<body>
+<h1>Parser About</h1>
+<p>I've extracted the very core parser method and cleaned it and the comments up some.</p>
+
+<p>The first section listed as <em>constants</em> are simply global values that contain an arbitrary unique number value. I use these values as <em>flags</em> throughout the code to track what state the parser is in, since a variable like <code>self::NODE_SINGLE</code> is easier to remember when writing a long switch statement than say the number (<code>3</code>).</p>
+
+<p>Then we get into the main <code>parse</code> function. All it really does is go through the <code>$source</code> string character by character and depending if it is already inside of a node (<code>&lt;tag></code>) or in content data, it will set certain flags based on what character it encounters.</p>
+
+<p>This is easier to see in an example. Say <code>$source</code> contains the string value <code>&lt;html>my web page&lt;/html></code>. When the parser starts it is not in a node. When it encounters the character (<code>&lt;</code>) it realizes it has entered a node. Here it does not record this <em>token</em> character. Otherwise it continues to record all of the characters inside this node until it reaches a <em>leave token</em> like (<code>></code> or <code>/></code>). As you can see in the function we do a little look-ahead and look-behind action. This keeps us from having to waste code and processor cycles until we find one of the main tokens/characters. If we look ahead and find more relevant tokens we jump the position pointer (<code>$pos</code>) past this place. If we look behind we can trim these characters off the collected node data. That way we are only recording node or content data and not token characters.</p>
+
+<p>Finally, if we have been in a node (<code>if ($node)</code>), at the end of checking the current character, we then test if we are not in a node (<code>if (!$node)</code>). If that is the case, we have left the node so we send it to another function that gathers information on that node and adds it to a collection (<code>array</code>) of all nodes on the page.</p>
+
+<p>Besides building a collection of nodes with <code>name=value</code> pairs of the node's <em>type</em>, <em>name</em>, <em>nesting depth</em>, and so on, I also track what the nodes parent node is, if it has children and if so which nodes, what the nodes complement is (<code>&lt;html>...&lt/html></code>) and a bunch of other stuff. You can get a taste of this by looking at the source code in the <a href="parser.zip">parser.zip file</a>. The base code that this is taken from is in the file: <code>raw.xml.parser.php</code>. The other files expand on this base functionality to include things like <em>DOM properties</em>, <em>helper methods</em>, and to rebuild the <code>$source</code> from the <code>$nodes</code> collection. There is also a <a href="parser_tests.php" target="blank">Parser Tests page</a> <em><small>(opens in new window/tab)</small></em> for seeing what happens when you parse and rebuild source code of your choosing.</p>
+
+<p>On a closing note, the obvious intention of this is to parse in an <code>xhtml</code> template and then perform <em>transformations</em> on that source before sending it off to the client browser for viewing. Overall I feel pretty good about where this code is at, but it is a <em>"work in progress"</em> and there are quite a few more things I would like to implement to make it more useful.</p>
+
+<p>Cheers, Kevin</p>
+
+<?php highlight_file('example.php'); ?>
+</code>
+</body>
+</html>

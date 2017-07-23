@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Self Closing Element</title>
+<meta charset="utf-8">
+<script type="text/javascript">
+
+// void or self-closing rules are executed directly by the browser
+// which will auto-close a tag, but after the document has loaded
+// so we simply reassign "child" elements if the tag is left unclosed
+
+// must test in other browsers
+
+// http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
+
+
+// must be one way or other, no catch-all solution // 'link' and 'call' only
+
+/*
+selfClose: false, // must be one way or other, no catch-all solution // 'link' and 'call' only
+closeSelf: function() {
+	var frag = document.createDocumentFragment();
+	while(this.childNodes.length > 0) {
+		frag.appendChild(this.firstChild);
+	}
+	this.parentNode.insertBefore(frag, this.nextSibling);
+},
+*/
+
+var closeSelf = function() {
+	if (this.childNodes.length > 0) {
+		var frag = document.createDocumentFragment();
+		while(this.childNodes.length > 0) {
+			frag.appendChild(this.firstChild);
+		}
+		this.parentNode.insertBefore(frag, this.nextSibling);
+	}
+}
+
+document.registerElement('ibis-data', {
+	prototype: Object.create(
+		HTMLElement.prototype,
+		{
+			createdCallback: {value: function(){
+				/*
+				if (ibis.selfClose && this.childNodes.length !== 0) {
+					ibis.closeSelf.call(this);
+				}
+				*/
+				closeSelf.call(this);
+				console.log(document.body.innerHTML); // outerHTML
+			}}
+		}
+	)
+});
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+	
+	<ibis-data call="callable arg1 arg2 argN"/>
+	This tag is not self closing by the browser&apos;s rules...handle that
+    <div>This is some div content</div>
+</body>
+</html>
+
+
+
+

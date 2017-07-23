@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+// IE 9+/- polyfill
+(function() {
+  if (typeof window.Event == 'function') {
+  return false;
+  }
+  //function EventPolyfill (type) {
+  window.Event = function (type) {
+    var event = document.createEvent('Event');
+    event.initEvent(type, true, true);
+    return event;
+  }
+  //EventPolyfill.prototype = window.Event.prototype;
+  //window.Event = EventPolyfill;
+})();
+
+// console.log(window.Event.prototype);
+
+
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill
+// http://stackoverflow.com/questions/26596123/internet-explorer-9-10-11-event-constructor-doesnt-work
+// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+// https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
+// https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+//
+// IE >= 9 polyfill
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill
+(function () {
+  if (typeof window.CustomEvent == 'function') {
+	return;
+  }
+  function CustomEvent (event, params) {
+    params = params || { bubbles: false, cancelable: false, detail: undefined };
+    var evt = document.createEvent('CustomEvent');
+    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+    return evt;
+  };
+  CustomEvent.prototype = window.CustomEvent.prototype;
+  window.CustomEvent = CustomEvent;
+  //window.Event = CustomEvent;
+})();
+
+// var e = document.createEvent('Event');
+// e.initEvent('foobar', true, true);
+
+
+window.addEventListener('foobar', function(e){
+  console.log('event', e.type)
+});
+
+// window.dispatchEvent(e)
+
+window.dispatchEvent(new Event('foobar'));
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

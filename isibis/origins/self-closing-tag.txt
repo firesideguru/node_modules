@@ -1,0 +1,75 @@
+
+
+HTML 5.2
+Editor’s Draft, 14 January 2017
+http://w3c.github.io/html/syntax.html#closing-elements-that-have-implied-end-tags
+
+HTML
+Living Standard — Last Updated 18 January 2017
+https://html.spec.whatwg.org/multipage/syntax.html#void-elements
+
+
+MDN Empty element
+https://developer.mozilla.org/en-US/docs/Glossary/Empty_element
+
+
+
+
+When is a closing </li> not optional?
+http://stackoverflow.com/questions/25111449/when-is-a-closing-li-not-optional
+
+To Close or Not To Close Tags in HTML5
+http://blog.teamtreehouse.com/to-close-or-not-to-close-tags-in-html5
+
+
+
+
+<area>
+<base>
+<br>
+<col>
+
+<command /> ???
+
+<embed>
+<hr>
+<img>
+<input>
+<keygen>(HTML 5.2 Draft removed)
+<link>
+<meta>
+<param>
+<source>
+<track>
+<wbr>
+
+
+https://html.spec.whatwg.org/multipage/syntax.html#void-elements
+area
+base
+br
+col
+embed
+hr
+img
+input
+keygen
+link
+menuitem
+meta
+param
+source
+track
+wbr
+
+
+obsolete / non-standard void
+basefont
+bgsound
+frame
+isindex
+
+self-closing / optional element
+
+
+

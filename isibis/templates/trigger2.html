@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<title key="page.title">{{page.title}}</title>
+<!--<base href="http://54.191.105.177">-->
+<style type="text/css">
+trigger {
+  cursor: pointer;
+}
+</style>
+<script>
+window.onload = function() {
+  // src="ibis.js" defer
+  var data = document.querySelector('data');
+  data.data = 'bar';
+  Object.defineProperty(data, 'foo', {
+    set: function (val) {
+      console.log('SET FOO CALLED')
+      this.setAttribute('foo', val)
+    },
+    get: function () {
+      console.log('GET FOO CALLED')
+      return this.getAttribute('foo')
+    }
+  });
+  
+  console.log(data.constructor);
+  
+  // console.log(HTMLElement.prototype)
+  
+  // console.log(data.parentNode.innerHTML);
+  // data.foo = 'pizza'
+  // console.log(data.foo)
+  // setAttr(data, 'foo', 'joice')
+  // console.log(data.parentNode.innerHTML);
+  // console.log(data.foo)
+}
+
+
+</script>
+
+<!-- link caches and dedupes request/responses -->
+<link rel="get" href="http://54.191.105.177/page1.json" type="json" alias="page" id="page">
+
+</head>
+<body>
+  <data href="foo.json" title="data-id"></data>
+  <trigger for="page" attr="href" value="http://54.191.105.177/page1.json" radio="pages">Page 1</trigger>
+  <trigger for="page" attr="href" value="http://54.191.105.177/page2.json" radio="pages">Page 2</trigger>
+  
+  <div bind="page.content" ns="foo" repeat="inner">
+    <p key="para">{{foo.para}}</p>
+  </div>
+  
+</body>
+</html>

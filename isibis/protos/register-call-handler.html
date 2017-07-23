@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<title>registerCallHandler removeCallHandler</title>
+<script>
+
+// https://developer.mozilla.org/en-US/docs/Web/Events
+// https://www.khanacademy.org/computing/computer-programming/html-css-js/html-js-dom-events/a/dom-event-types
+// var eventTypes = []; // for validation ... DO NOT VALIDATE EVENT TYPES there are too many and it's a moving target
+
+
+// debounce
+// http://underscorejs.org/#debounce
+// https://davidwalsh.name/function-debounce
+// https://github.com/SitePen/dgrid/blob/master/util/misc.js#L84
+
+
+// add debounce parameter to registerCallHandler ('eType', 'alias', handler[, debounce<int>]); debounce = 0
+
+var callEvents = {};
+
+
+window.onload = function () {
+  
+  // can we also use proxy for modern browsers
+  // to detect node.setAttribute('call', 'value');
+  
+  // init calls ... registerCallNodes()
+  var calls = document.querySelectorAll('[call]');
+  for (var i = 0, call; i < calls.length; i ++) {
+    Object.defineProperty(calls.item(i), 'call', {
+      configurable: true,
+      enumerable: true,
+      get: function () {
+        return this.getAttribute('call');
+      },
+      set: function (value) {
+        this.setAttribute('call', value);
+      }
+    });
+  }
+  
+  
+  // test get|set on node.call...
+  
+  // console.log('call' in calls[0]) // true
+  
+  // console.log(calls[0]) // foo
+  // window.setTimeout(function(){
+  //   calls[0].call = 'bar'
+  //   console.log(calls[0]) // bar
+  // },100) // required for test
+    
+};
+
+function registerCallHandler (eventList, alias, handler) { // attachCallHandler
+  // validate alias, handler here
+  var eventTypes = parseEventList(eventList);
+  for (var i = 0, eventType; i < eventTypes.length; i ++) {
+    eventType = eventTypes[i];
+    if (!(eventType in callEvents)) {
+      callEvents[eventType] = {};
+      document.addEventListener(eventType, delegateEvent);
+    }
+    callEvents[eventType][alias] = handler;
+    // if (!(alias in callEvents[eventType])) {...}
+  }
+}
+
+function removeCallHandler (eventList, alias) { // detachCallHandler
+  var eventTypes = parseEventList(eventList);
+  for (var i = 0, eventType; i < eventTypes.length; i ++) {
+    var eventType = eventTypes[i];
+    delete callEvents[eventType][alias];
+    if (Object.keys(callEvents[eventType]).length === 0) {
+      document.removeEventListener(eventType, delegateEvent);
+    }
+  }
+}
+
+function parseEventList (eventList) {
+  if (typeof eventList == 'string') {
+    return eventList.split(' ');
+  }
+  else if (eventList instanceof Array) {
+    return eventList;
+  }
+  else {
+    // throw new Error('');
+  }
+}
+
+function delegateEvent (event) {
+  var node = event.target,
+      type = event.type;
+  do {
+    if ('call' in node && node.call in callEvents[type]) {
+      callEvents[type][node.call](node);
+      break;
+    }
+  }
+  while (node = node.parentNode);
+}
+
+function debounce (handler, delay) {
+  
+}
+
+
+// testing ...
+
+registerCallHandler('click', 'bar', dobar);
+registerCallHandler('mouseover', 'foo', dofoo);
+
+function dobar (node) {
+  console.log('node call', node.call);
+  // removeCallHandler('click', 'bar') // do once
+}
+
+function dofoo (node) {
+  if (typeof dofoo.count == 'undefined') {
+    dofoo.count = 0;
+  }
+  dofoo.count ++
+  if (dofoo.count == 5) {
+    removeCallHandler('mouseover', 'foo') // do five times
+  }
+  console.log('node foo', node.nodeName);
+}
+
+
+</script>
+<body>
+  <section><div call="bar"><p><span>I am foo callable</span></p></div></section>
+  <div call="foo">Hover over me</div>
+</body>
+</html>

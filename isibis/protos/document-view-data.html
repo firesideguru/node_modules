@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<title>document.viewData</title>
+<script>
+
+
+var _viewData = (function () {
+  var _data = {};
+  // var validKey = function (key) {
+  //   var valid = typeof key === 'string';
+  //   // if (!valid) throw new Error('');
+  //   return valid;
+  // };
+  // var validVal = function (val) {
+  //   var valid = typeof val === 'object';
+  //   // if (!valid) throw new Error('');
+  //   return valid;
+  // };
+  return {
+    set: function (key, val) {
+      // validate here ...
+      _data[key] = val;
+      return this.has(key);
+    },
+    get: function (key) {
+      return _data[key];
+    },
+    has: function (key) {
+      return key in _data;
+    },
+    del: function (key) {
+      delete _data[key];
+      return !this.has(key);
+    }
+  };
+})();
+
+var _viewHtml = (function () {
+  var _html = {};
+  // var validKey = function (key) {
+  //   var valid = typeof key === 'string';
+  //   // if (!valid) throw new Error('')
+  //   return valid;
+  // };
+  // var validVal = function (val) {
+  //   var valid = typeof val === 'string';
+  //   // if (!valid) throw new Error('');
+  //   return valid;
+  // };
+  return {
+    set: function (key, val) {
+      // validate here ...
+      _html[key] = val;
+      return this.has(key);
+    },
+    get: function (key) {
+      return _html[key];
+    },
+    has: function (key) {
+      return key in _html;
+    },
+    del: function (key) {
+      delete _html[key];
+      return !this.has(key);
+    }
+  };
+})();
+
+var viewData = {};
+var viewHtml = {};
+
+function registerBindData (name, data) { // document.registerViewData
+  _viewData.set (name, data);
+  Object.defineProperty(viewData, name, {
+    get: function () {
+      return _viewData.get(name);
+    },
+    set: function (value) {
+      _viewData.set(name, value);
+      console.log(`do update elements bound to ${name} here`);
+    }
+  });
+}
+
+function registerViewHtml (name, html) {
+  _viewHtml.set (name, html);
+  Object.defineProperty(viewHtml, name, {
+    get: function () {
+      return _viewHtml.get(name);
+    },
+    set: function (value) {
+      _viewHtml.set(name, value);
+      console.log(`do update elements bound to ${name} here`);
+    }
+  });
+}
+
+// registerBindData('bing', {java:'ping'})
+// registerBindData('bong', {fitz:'twang'})
+
+// console.log(viewData.bing)
+// console.log(viewData.bong)
+
+// var didset = viewData.bing = {one:"two"}
+// var diddel = viewData.
+
+// console.log('has', _viewData.has('bingx'))
+
+// console.log(viewData.bing)
+
+
+
+// define '_viewData' on 'ibis'
+// define 'registerBindData' on 'document'
+
+// var _test = (function (d) {
+//   d.foo = function () {
+//     console.log(d);
+//   };
+//   return {
+//     get: function () {
+//       d.foo();
+//     }
+//   }
+// })(document);
+
+// _test.get();
+// console.log(document.foo)
+
+
+
+</script>
+<body>
+  
+</body>
+</html>

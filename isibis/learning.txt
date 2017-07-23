@@ -1,0 +1,77 @@
+
+
+
+Polyfill and good examples
+https://en.wikipedia.org/wiki/Polyfill
+https://remysharp.com/2010/10/08/what-is-a-polyfill
+
+
+
+Optimize CSS Delivery and requestAnimationFrame example
+https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery
+
+Debounce example
+https://github.com/SitePen/dgrid/blob/master/util/misc.js#L84
+
+CSSStyleSheet David Walsh
+https://davidwalsh.name/add-rules-stylesheets
+
+Event Deligation David Walsh
+https://davidwalsh.name/event-delegate
+
+Element Matches Selector David Walsh
+https://davidwalsh.name/element-matches-selector
+
+Debounce Example David Walsh
+https://davidwalsh.name/function-debounce
+
+Underscore JS
+http://underscorejs.org/#debounce
+
+AMD Loader and Curl.js David Walsh
+https://davidwalsh.name/curljs
+https://github.com/unscriptable/curl
+
+MDN parentNode.append
+https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append
+
+MDN parentNode.prepend
+https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend
+
+MDN parentNode.firstElementChild
+https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/firstElementChild
+
+MDN querySelector and some interesting code snippets
+https://developer.mozilla.org/en-US/Add-ons/Code_snippets/QuerySelector
+
+MDN document.styleSheets
+https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
+
+MDN Using Dynamic Styling Information
+https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information
+
+Using GIT To Deploy Application To EC2 Server
+http://www.robert-drummond.com/2013/04/25/a-node-js-application-on-the-amazon-cloud-part-1-installing-node-on-an-ec2-instance/
+
+Inserting Arbitrary HTML Into A Document Fragment
+http://stackoverflow.com/questions/9284117/inserting-arbitrary-html-into-a-documentfragment
+
+JavaScript Inheritance Patterns
+http://davidshariff.com/blog/javascript-inheritance-patterns/
+
+10 Node.js Best Practices: Enlightenment from the Node Gurus
+https://www.sitepoint.com/node-js-best-practices-from-the-node-gurus/
+
+HTML <output> tag
+http://www.w3schools.com/tags/tag_output.asp
+
+NodeJS Core Library
+https://github.com/nodejs/node/tree/master/lib
+
+CoffeeScript FWIW
+http://coffeescript.org/
+
+NPM Scripting
+https://docs.npmjs.com/misc/scripts
+
+

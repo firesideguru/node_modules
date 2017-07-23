@@ -1,0 +1,106 @@
+
+
+https://jsperf.com/innerhtml-vs-documentfragment-vs-appendchild
+
+<extend></extend>
+
+[IBIS]
+How do "I" want to use it?
+Trust my self, play, what feels right!
+
+
+<el bind="foo" [ns="bar"] [page="none|all|N"]>
+  <el key="bar:prop">{{bar:prop}}</el>
+</el>
+
+<el view="baz" [ns="bar"]>
+  <el tag="bar:menu">[[bar:menu]]</el>
+</el>
+
+// if <el> has both bind="" and view="" then ns="" is for both on that <el>
+// ns scopes the bind and view attr to the content of that element (only)
+// and if defined, must be used for all calls to those references
+// unless the view reference only has a single root value and no tag or [[tag]]
+// tokens are used to insert results
+// or omit ns in context of view
+
+<el view="baz"></el>
+
+<el call="bob"></el>
+
+<data as="foo" [type="json"] [src="url"]></data>
+
+<view as="baz" [type="html"] [src="url"]></view>
+
+
+=======================================================================
+
+// ??? use selector vs id
+
+<nav>
+<state>
+<group>
+
+<attrset id="foo" for="bar">
+  <attr for="baz bing" name="class" value="blue">content ignored</attr>
+  <attr name="class" value="red">this is for="bar" by inheritance</attr>
+</attrset>
+
+<attr id="bob" for="baz"></attr>
+
+<attr id="fiz" for="zoo"></attr>
+
+
+<attr for="foo" radio="x"></attr>
+<attr for="bob" radio="x"></attr>
+
+
+<attr for="fiz" name="class" value="blue" [toggle|radio|trigger]>
+  toggle|radio|trigger places <attr> element into 'trigger' mode
+  and makes the element visible
+</attr>
+
+<trigger for="fiz" name="class" value="blue" [toggle|radio]>
+  unless we need to trigger other events or changes
+  then we might want a more generic <trigger> element
+  or if we want to visually differntiate between the two ???
+  such that <attr> is hidden and <trigger> is visible in the DOM
+  and <attr> is self-closing "void" and <trigger> is closed
+</trigger>
+
+// chaining <attr>|<attrset> or <trigger> for="id" ...
+// if for="id" references another <attr> then that will be chained
+
+// collissions of name|value changes will be handled last referenced
+
+
+
+
+<trigger for="id" prev>paginated content</trigger>
+<trigger for="id" next>paginated content</trigger>
+
+<trigger for="page" attr="bind" value="data.page1" radio="pages">Page 1</trigger>
+<trigger for="page" attr="bind" value="data.page2" radio="pages">Page 2</trigger>
+
+<trigger for="page" attr="src" value="url1" radio="pages">Page 1</trigger>
+<trigger for="page" attr="src" value="url2" radio="pages">Page 2</trigger>
+
+
+=======================================================================
+
+EXTENSIBLE
+
+extend test conditions
+extend formatting of content map=
+
+programmatic trigger methods
+
+history state and rollback
+
+
+
+
+
+
+
+

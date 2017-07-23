@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+window.onload = function() {
+  var json = document.querySelector('data');
+  var data = JSON.parse(json.textContent);
+
+  var html = document.querySelector('view').childNodes;
+  
+  var frag = document.createDocumentFragment();
+  
+  for (var i = 0; i < html.length; i ++) {
+    frag.appendChild(html.item(i));
+  }
+  
+  var view = document.querySelector('[view]');
+  var attr = view.getAttribute('view');
+
+  view.appendChild(frag);
+  
+  // populate view from data
+};
+
+var data = {
+  bind: 'foo',
+  link: 'bar',
+  label: 'baz'
+}
+
+function innerHTML () {
+  
+}
+
+function outerHTML () {
+  
+}
+
+function attrKey () {
+  
+}
+
+function expose () {
+  var text = document.querySelector('textarea');
+  var view = document.querySelector('ul');
+  text.innerHTML = view.outerHTML;
+}
+
+</script>
+</head>
+<body>
+
+<ul view="link" wrap="inner" bind="{{bind}}">
+  <li><a href="{{link}}" key="label"></a></li>
+</ul>
+
+<textarea></textarea>
+</body>
+</html>

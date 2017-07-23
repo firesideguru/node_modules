@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<title>CORS Test</title>
+<base href="http://54.191.105.177">
+<script>
+
+// CORS tutorials...
+// https://remysharp.com/2011/04/21/getting-cors-working
+// https://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/
+//
+
+var host = 'http://54.191.105.177';
+var path = 'test.html';
+
+var href = `${host}/${path}`;
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', href, true);
+
+xhr.onreadystatechange = function() {
+	if(xhr.readyState === 4) { // done
+		if(xhr.status === 200) { // complete
+			document.body.innerHTML = xhr.responseText;
+		}
+	}
+};
+
+xhr.send(null);
+
+</script>
+</head>
+<body>
+  
+</body>
+</html>

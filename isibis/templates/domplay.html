@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<title>DOM Play</title>
+<style type="text/css">
+trigger {
+  cursor: pointer;
+}
+</style>
+<script>
+/***
+
+DOM Extension ...
+
+http://perfectionkills.com/whats-wrong-with-extending-the-dom/
+
+https://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html#ID-58190037
+
+http://javascript.info/tutorial/attributes-and-custom-properties
+
+https://msdn.microsoft.com/en-us/library/dd282900(v=vs.85).aspx
+
+http://lea.verou.me/2015/04/idea-extending-native-dom-prototypes-without-collisions/
+
+Object.create() worth another look!!!
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+
+***/
+
+
+</script>
+<link id="doc" rel="get" href="doc.json" type="text/json" alias="doc">
+</head>
+<body>
+  <data bind="doc.page1" as="page"></data>
+  
+  <div bind="">
+    <span>The quick</span>
+    <span>brown</span>
+    <span>fox...</span>
+  </div>
+  
+  <trigger for="foo" attr="href" value="foo.json"><strong>Click Me</strong></trigger>
+</body>
+</html>

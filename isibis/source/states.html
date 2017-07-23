@@ -1,0 +1,244 @@
+
+<data as="" src=""></data>
+<view as="" src=""></view>
+<nav as="" src=""></nav>
+
+<navmap as="" root="" base="">
+  
+  <group as="">
+    <state as="" path="" static>
+      <load href="" static></load>
+      <title>Page Title</title>
+      <attr for="" name="" value=""></attr>
+      <header name="" value=""></header>
+      <args foo="bar" baz="bob"></args>
+      <etc></etc>
+    </state>
+    
+    <static path=""></static>
+    
+    <alias for="">
+      <title></title>
+    </alias>
+  </group>
+  
+</navmap>
+
+
+
+
+<states root="/user/www" base="www.mysite.com">
+  
+  <state as="home" path="/">
+    <load src="index.html"></load>
+    <args foo="bar" baz="bob"></args>
+    <title>My Site Home</title>
+    <attr for="main-view" name="src" value="home-view"></attr>
+  </state>
+  
+  <!--
+  
+  <state path="..."> can be any pattern and need not reflect a directory structure
+  or it can, and we can omit <load> and <path> will be used instead
+  
+  We must explicitly call <extend> or our include <view>s from the target file
+  
+  Each <state> node acts as a data record
+  for text content we can just call the node name directly, implicitly calling
+  {{node.text}} OR key="node.text"
+  for node attribute values we can call {{node.attr}} OR key="node.attr"
+  Ex:
+  <icon path="my-icon.png" title="My Icon"></icon>
+  Here we can access path and title via {{icon.path}} {{icon.title}}
+  OR
+  <icon>my-icon.png</icon>
+  We can access the path as node text via {{icon}} or {{icon.text}}, same diff.
+  OR
+  We can use some combination of text and attributes
+  
+  -->
+  
+  <group as="main-menu">
+    <alias for="home"></alias>
+    <state path="about.html">
+      <title>My Site About</title>
+      <attr for="main-view" name="src" value="about-view"></attr>
+    </state>
+    <state path="contact.html">
+      <title>My Site Contact</title>
+      <attr for="main-view" name="src" value="contact-view"></attr>
+    </state>
+    <alias for="sitemap"></alias>
+  </group>
+  
+  <state as="sitemap" path="sitemap.html">
+    <title>My Site Sitemap</title>
+    <attr for="main-view" name="src" value="sitemap-view"></attr>
+    <food drink="java" eat="pizza">Caio</food>
+  </state>
+  
+  <!--
+  
+  Here we have defined a <grou> (collection) of state records
+  that we can use to generate a main menu
+  We have also defined an alias to an ungrouped (satellite) state record
+  We can reference satellite records as many times as we need
+  Order is not important for satellites or referencing them
+  Order is important for collections of state records
+  for what order they will be iterated over
+  
+  Possibly we can override/overload specific nodes in an alias of the satellite state record ???
+  Otherwise, there is no need for cascading or inheritance, that I can see at this time
+  
+  -->
+  
+</states>
+
+========================================
+
+<script>
+// states json ...
+{
+  "root": "/user/www",
+  "base": "www.mysite.com",
+  
+  "state": [
+    {
+      "as": "home",
+      "path": "/",
+      "args": {
+        "foo": "bar",
+        "baz": "bob"
+      },
+      "title": "My Site Home",
+      "attr": [
+        {
+          "for": "main-view",
+          "name": "src",
+          "value": "home-view"
+        }
+      ]
+    },
+    
+    {
+      "as": "sitemap",
+      "path": "sitemap.html",
+      "title": "My Site Sitemap",
+      "attr": [
+        {
+          "for": "main-view",
+          "name": "src",
+          "value": "sitemap-view"
+        }
+      ],
+      "food": {
+        "drink": "java",
+        "eat": "pizza",
+        "text": "Caio"
+      }
+    }
+  ],
+  "group": [
+    {
+      "as": "main-menu",
+      // alias breaks down with split ordering ...
+      {
+        "type": "alias"
+        "for": "home"
+      },
+      {
+        "type": "state",
+        // ... maybe using types we can do away with [] collection notation mostly
+      }
+    }
+  ]
+}
+</script>
+
+
+========================================
+
+<!--
+
+<state path="/">
+  <title>Home</title>
+  <attr for="" name="" value=""></attr>
+  <attr for="" name="" value=""></attr>
+  <state path="">
+    <title></title>
+    <attr for="" name="" value=""></attr>
+    <attr for="" name="" value=""></attr>
+  </state>
+</state>
+
+========================================
+
+<state path="/" name="main-menu">
+  <title>Site::Home</title> // {{title}} key="title"
+  <attr for="viewport" name="view" value="home-view"></attr> // self-closing (void) - NO
+  <attr for="viewport" name="bind" value="home-data"></attr>
+  <icon>home-icon.png</icon> // {{icon}} //  attr for="link-img" name="src" value="home-icon.png"
+</state>
+
+<state path="/about">
+  <title>Site::About</title>
+  <attr for="viewport" name="view" value="about-view"></attr>
+  <attr for="viewport" name="bind" value="about-data"></attr>
+  <icon>about-icon.png</icon>
+</state>
+
+========================================
+
+<state path="/" name="main-menu">
+  <title>Site::Home</title> // {{title}} key="title"
+  <attr for="viewport-view" name="src" value="?view=home"></attr> // self-closing (void)
+  <attr for="viewport-data" name="src" value="?data=home"></attr>
+  <icon>home-icon.png</icon> // {{icon}} //  attr for="link-img" name="src" value="home-icon.png"
+</state>
+
+<state path="/about">
+  <title>Site::About</title>
+  <attr for="viewport-view" name="src" value="?view=about"></attr>
+  <attr for="viewport-data" name="src" value="?data=about"></attr>
+  <icon>about-icon.png</icon>
+</state>
+
+========================================
+
+resolves path="/" and all values
+then resolves path="/about" and overrides "/" values
+then renders output based on overidden cascading and inherited values
+
+========================================
+
+<state path="/main" name="main-menu">
+  <title>Site::Home</title> // {{title}} key="title"
+  <attr for="viewport-view" name="src" value="?view=home"></attr> // self-closing (void)
+  <attr for="viewport-data" name="src" value="?data=home"></attr>
+  <icon>home-icon.png</icon> // {{icon}} //  attr for="link-img" name="src" value="home-icon.png"
+</state>
+
+<state path="/main/about">
+  <title>Site::About</title>
+  <attr for="viewport-view" name="src" value="?view=about"></attr>
+  <attr for="viewport-data" name="src" value="?data=about"></attr>
+  <icon>about-icon.png</icon>
+</state>
+
+// the following provides us a new "store" template base instead of the "main" template
+
+<state path="/store">
+  <title>Site::Store::Home</title>
+  <attr for="viewport-view" name="src" value="?view=store-index"></attr>
+  <attr for="viewport-data" name="src" value="?data=store-index"></attr>
+  <icon>about-icon.png</icon>
+</state>
+
+<state path="/store/shoes">
+  <title>Site::Store::Shoes</title>
+  <attr for="viewport-view" name="src" value="?view=store-shoes"></attr>
+  <attr for="viewport-data" name="src" value="?data=store-shoes"></attr>
+  <icon>about-icon.png</icon>
+</state>
+
+-->

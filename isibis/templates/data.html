@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<title key="page.title">{{page.title}}</title>
+<style type="text/css">
+trigger {
+  cursor: pointer;
+}
+</style>
+<script>
+window.onload = function() {
+  var data = document.querySelector('data');
+  console.log(data.page)
+};
+</script>
+
+<link rel="get" href="http://54.191.105.177/doc.json" type="json" alias="doc" id="doc">
+
+</head>
+<body>
+  <el bind="" call=""></el>
+  
+  <get href="" type="" as=""></get>
+  
+  <data src="" as="page" type="" href="foo"></data>
+  <view src="" ns="page"></view>
+  
+  <import></import>
+  <export></export>
+  <insert></insert>
+  
+  <trigger for="page" attr="bind" value="doc.page1" radio="pages">Page 1</trigger>
+  <trigger for="page" attr="bind" value="doc.page2" radio="pages">Page 2</trigger>
+  
+  <div bind="page.content" ns="foo" repeat="inner">
+    <p key="para">{{foo.para}}</p>
+  </div>
+  
+</body>
+</html>

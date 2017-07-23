@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<title>DOM Onload Test</title>
+<script>
+
+document.addEventListener('readystatechange', ready, false);
+
+function ready () {
+  var state = document.readyState;
+  if (state == 'interactive' || state == 'complete') {
+    document.removeEventListener('readystatechange', ready, false);
+    expose();
+  }
+}
+
+// document.onreadystatechange = function () {
+//   var state = document.readyState;
+//   if (state == 'interactive' || state == 'complete') {
+//     expose();
+//   }
+// }
+
+function expose () {
+  // console.log(document.documentElement.outerHTML);
+  var open = document.getElementById('open');
+  console.log(open.children);
+}
+
+</script>
+</head>
+<body>
+  <p>The quick brown fox</p>
+  <p id="open">Jumped over the lazy dog.
+  <p>But that was just the start of his problems.</p>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ibis Play</title>
+<meta charset="utf-8">
+<style type="text/css">
+ibis-data,
+ibis-view {
+	display: block;
+}
+</style>
+<script type="text/javascript">
+
+
+var json = function(obj) {return JSON.stringify(obj);};
+var expose = function(string) {document.querySelector('#expose').innerHTML += '\n' +  string;};
+var clone = function(obj) {return JSON.parse(JSON.stringify(obj));};
+
+var ibis = {};
+	
+ibis.init = function() {
+	console.log(this.id);
+}
+
+ibis.test = function() {
+	return {
+		value: function() {
+			//console.log(this.id, this.nodeName);
+		}
+	}
+}
+
+ibis.cache = (function() {
+	var map = new WeakMap();
+	var cache = function() {
+		console.log(this.id);
+	};
+	cache.prototype.store = function(key, value) {
+		map.set(this, {key: value});
+	};
+	cache.prototype.fetch = function(key) {
+		map.get(this)[key];
+	};
+	return cache;
+})();
+	
+ibis.make = function() {
+	Object.defineProperty(this, 'cache', {
+		value: (function() {
+			console.log(this.id);
+			var map = new WeakMap();
+			var cache = function() {
+				console.log(this.id);
+			};
+			cache.prototype.store = function(key, value) {
+				map.set(this, {key: value});
+			};
+			cache.prototype.fetch = function(key) {
+				map.get(this)[key];
+			};
+			return cache;
+		})()
+	});
+};
+
+ibis.proto = function() {
+	return {
+		createdCallback: ibis.make()
+		//ibis.test() // works
+		/*{
+			value: ibis.init // works
+			//function() {
+			//	ibis.init.call(this);
+			//}
+		}*/,
+		attachedCallback: {
+			value: function() {
+				
+			}
+		},
+		detachedCallback: {
+			value: function() {
+				
+			}
+		}
+	};
+};
+
+document.registerElement('ibis-data', {
+	prototype: Object.create(
+		HTMLElement.prototype,
+		ibis.proto()
+	)
+});
+
+document.registerElement('ibis-view', {
+	prototype: Object.create(
+		HTMLElement.prototype,
+		ibis.proto()
+	)
+});
+
+var foo, bar, baz;
+window.addEventListener('DOMContentLoaded', function(){
+	foo = document.getElementById('foo');
+	bar = document.getElementById('bar');
+	baz = document.getElementById('baz');
+	
+	foo.addEventListener('data', function(e) {
+		
+	}, false);
+	//console.log(document.documentElement.innerHTML)
+}, false);
+
+window.addEventListener('load', function() {
+	
+}, false);
+
+</script>
+</head>
+<body>
+	<ibis-data id="foo">I am foo</ibis-data>
+	<ibis-data id="bar">I am bar</ibis-data>
+	<ibis-view id="baz">I am baz</ibis-view>
+	<textarea name="expose" id="expose" rows="20" style="width:100%; resize: vertical;"></textarea>
+</body>
+</html>
+
+
+
+

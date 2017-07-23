@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<title>Clone Node</title>
+<style type="text/css">
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+</style>
+<script>
+
+var ibis = {};
+ibis.data = {};
+
+ibis.data['foo'] = [
+  {name: 'Tobin', dob: '10/13/69'},
+  {name: 'Tamia', dob: '5/11/69'}
+];
+
+window.onload = function() {
+  var bound = document.querySelectorAll('[data-bind]')[0];
+  // var data = bound.getAttribute('data-bind');
+  bound.data = ibis.data.foo;
+  
+  var ref = bound;
+  
+  var clone = bound.cloneNode(true);
+  clone.data = bound.data;
+  
+  // console.log(ref.data);
+  
+  
+var frag = document.createDocumentFragment();
+var text = document.createTextNode('foo bar baz');
+frag.appendChild(text);
+// frag.innerHTML = '<b>foo</b>';
+var body = document.querySelector('body');
+body.appendChild(frag);
+console.log(body.innerHTML)
+
+};
+
+</script>
+</head>
+<body>
+  <div data-bind="foo">
+    <span>The quick</span>
+    <span>brown</span>
+    <span>fox...</span>
+  </div>
+  
+</body>
+</html>

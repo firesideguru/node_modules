@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<title>Play Thing</title>
+<style type="text/css">
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+#table, #table2, #table3 {
+  display: table;
+  margin: 20px;
+}
+
+.row {
+  display: table-row;
+}
+
+.col {
+  display: table-cell;
+  padding: 5px;
+  border: 1px solid silver;
+}
+
+.flex {
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.title {
+  display: table-caption;
+  text-align: left;
+  font-size: 1.25em;
+}
+
+
+
+</style>
+<script>
+//  src="../node_modules/temple/index.js"
+
+// document.querySelectorAll('[' + attrib + ']');
+
+// css attribute selector
+// http://www.w3schools.com/css/css_attribute_selectors.asp
+
+// can i use css3 selector
+// http://caniuse.com/#feat=css-sel3
+
+// css specification
+// https://www.w3.org/Style/CSS/current-work
+
+// css display-table example
+// http://www.w3schools.com/cssref/pr_class_display.asp
+
+// David Walsh
+// Get Element Attributes with JavaScript
+// https://davidwalsh.name/javascript-attributes
+
+var ibis = {};
+ibis.data = {};
+
+ibis.data['foo'] = [
+  {name: 'Tobin', dob: '10/13/69'},
+  {name: 'Tamia', dob: '5/11/69'}
+];
+
+window.onload = function() {
+  var bound = document.querySelectorAll('[data-bind]');
+  console.log(bound[0].children);
+  
+  var para = document.querySelectorAll('p');
+  console.log(para);
+  
+  var keyd = document.querySelectorAll('[data-key]');
+  console.log(keyd);
+};
+
+</script>
+</head>
+<body>
+  <div class="hidden">
+  <p data-key="0">The quick brown fox</p>
+  <p data-key="1">jumped over the lazy dog</p>
+  <p data-key="2">and headed to Dutch Bros</p>
+  <p data-key="3">for some fun.</p>
+  </div>
+  
+  <div id="table">
+    <div class="header title">Contact Book</div>
+    
+    <div class="row header">
+      <span class="col">&nbsp;</span>
+      <span class="col">Name</span>
+      <span class="col">DOB</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col">Edit</span>
+    </div>
+    
+    <div class="row" data-bind="foo" data-repeat="outer">
+      <span class="col">{{dd}}</span> <!-- function hook and display value -->
+      <span class="col">{{name}}</span>
+      <span class="col">{{dob}}</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col">{{edit}}</span> <!-- function hook and display value -->
+    </div>
+  </div>
+  
+  <div id="table2">
+    <div class="header title">Contact Book</div>
+    
+    <div class="row header">
+      <span class="col">&nbsp;</span>
+      <span class="col">Name</span>
+      <span class="col">DOB</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col">Edit</span>
+    </div>
+    
+    <div class="row" data-bind="foo" data-repeat="outer">
+      <span class="col" data-act="dd">M</span> <!-- function hook and display value -->
+      <span class="col" data-key="name">Tobin</span>
+      <span class="col" data-key="dob">10/13/69</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col" data-evt="edit">...</span> <!-- function hook and display value -->
+    </div>
+  </div>
+  
+  <div id="table3">
+    <div class="header title">Contact Book</div>
+    
+    <div class="row header">
+      <span class="col">&nbsp;</span>
+      <span class="col">Name</span>
+      <span class="col">DOB</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col">Edit</span>
+    </div>
+    
+    <div class="row" bind="foo" repeat="outer">
+      <span class="col" evt="dd">M</span> <!-- function hook and display value -->
+      <span class="col" key="name">Tobin</span>
+      <span class="col" key="dob">10/13/69</span>
+      <span class="col flex">&nbsp;</span>
+      <span class="col" evt="edit">...</span> <!-- function hook and display value -->
+    </div>
+  </div>
+  
+  <template id="edit-menu">
+    <ul data-bind="edit">
+      <li><button data-evt="edit">Edit</button></li>
+      <li><button data-evt="remv">Remove</button></li>
+      <li><button data-evt="cncl">Cancel</button></li>
+    </ul>
+  </template>
+  
+  <template id="edit-record" data-bind="edit">
+    {{data.key}} {{data.val}} {{data.value}}
+  </template>
+  
+</body>
+</html>

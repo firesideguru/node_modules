@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>ibis load and script tests</title>
+<load onerror="foo">
+  <div>This is some div content</div>
+</load>
+<script>
+
+// inject javascript into document from text source, such as AJAX load content
+
+var code = `
+  // alert('foobar');
+  console.log('foobbar');
+`;
+
+var css = `
+  load {
+    display: none;
+  }
+  p {
+    background: red;
+    color: white;
+  }
+`;
+
+function foo (msg, node) {
+  console.log(node, msg);
+}
+
+window.onload = function() {
+  
+  var load = document.querySelector('load');
+  var err = load.getAttribute('onerror');
+  if (typeof window[err] == 'function') {
+    window[err]('loading error message', load);
+  }
+  
+  var script = document.createElement('script');
+  script.textContent = code;
+  load.appendChild(script); // works
+  
+  var style = document.createElement('style');
+  style.textContent = css;
+  load.appendChild(style); // works
+};
+
+// componentized...
+//
+// <load src="path"> html that supports specific dynamic elements only...
+//
+// load component modules (plugins) that encompass all resources neccessary
+// such as => <data> <view> <css> <script> <state>
+// and, using attributes, assemble (make, build) that into
+// (optionally) interactive document widgets and layouts
+// such as => blog posts (form input, html output, style, behaviors), etc
+//
+// and that work seemlessly with a backend delivery/update system
+//
+// and that works out of the box with distributed versioning and file serving
+//
+// with this approach namespacing components should be a requirement
+//
+// still using basic html declarative markup for "logicless" templating
+//
+// static site gen with hybrid dynamic features
+// fail gracefully, feature enhanced, fluid layouts
+
+// module "named" directory in "components" directory
+// serve server-side and client-side assets from this
+// named directory...
+//
+// and harmonious with basic data assets and layout-content building
+
+
+
+</script>
+</head>
+<body>
+  <p>This is a paragraph</p>
+</body>
+</html>

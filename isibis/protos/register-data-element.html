@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<title>register data element</title>
+<script>
+
+window.onload = function () {
+  registerDataTags();
+  registerBindAttrs();
+  // registerKeyAttrs();
+};
+
+
+function registerDataTags () {
+  
+  var nodeList = document.querySelectorAll('data');
+  
+  for (var i = 0, node; i < nodeList.length; i ++) {
+    node = nodeList.item(i);
+    
+    Object.defineProperty(node, 'src', srcProp);
+    // Object.defineProperty(node, 'ns', nsProp);
+    // Object.defineProperty(node, 'as', asProp);
+    // Object.defineProperty(node, 'href', hrefProp);
+    Object.defineProperty(node, 'type', typeProp);
+    Object.defineProperty(node, 'name', nameProp);
+    
+    if (node.src && node.src.length) {
+      // fetch data via get
+      // use <base> value here
+    }
+    else {
+      // read contents as data
+    }
+    
+    // if name|as then alias, else global
+    // if type then parse to object, else json or error
+  }
+  
+  var srcProp = {
+    enumerable: true,
+    configurable: true,
+    get: function () {
+      return this.getAttribute('src');
+    },
+    set: function (value) {
+      this.setAttribute('src', value);
+      // fetch data via get
+    }
+  };
+}
+
+
+function registerBindAttrs () {
+  
+  var nodeList = document.querySelectorAll('data');
+  
+  for (var i = 0, node; i < nodeList.length; i ++) {
+    node = nodeList.item(i);
+    Object.defineProperty(node, 'bind', bindProp);
+    Object.defineProperty(node, 'ns', nsProp);
+  }
+  
+  var bindProp = {
+    enumerable: true,
+    configurable: true,
+    get: function () {
+      return this.getAttribute('bind');
+    },
+    set: function (value) {
+      this.setAttribute('bind', value);
+      // update viewData
+    }
+  };
+  
+  var nsProp = {
+    enumerable: true,
+    configurable: true,
+    get: function () {
+      return this.getAttribute('ns');
+    },
+    set: function (value) {
+      this.setAttribute('ns', value);
+    }
+  };
+}
+
+function parseViewHtml (html, data, ns) {
+  
+}
+
+function registerDataType (type, callback, ns) { // handler, parser
+  
+}
+
+
+</script>
+<body>
+  <view><div call="bar"><p><span>I am foo callable</span></p></div></view>
+  <data src="">Hover over me</data>
+</body>
+</html>

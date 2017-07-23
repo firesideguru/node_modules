@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<title>test 2</title>
+<!--
+<script src="../source/shared.js"></script>
+<script src="../source/styles.js"></script>
+<script src="../source/data.js"></script>
+<script src="../source/view.js"></script>
+<script src="../source/traverse.js"></script>
+<script src="../source/trigger.js"></script>
+
+<script src="../source/history.js"></script>
+-->
+
+<script>
+
+// testing ...
+
+// var foo = [
+//   {bar: 'one', baz: 'alpha', bob: 'gold'},
+//   {bar: 'two', baz: 'omega', bob: 'silver'}
+// ];
+
+// console.log(JSON.stringify(foo))
+
+// registerBindData('foo', foo)
+
+// registerViewHtml('foo', 'bar')
+// console.log(viewHtml['foo'])
+
+
+var selectAll = function (node, selector) {
+  return node.querySelectorAll(selector);
+};
+
+var toArray = function (collection) {
+  var array = [];
+  for (var i = 0; i < collection.length; i ++) {
+    array.push(collection[i]);
+  }
+  return array;
+};
+
+var local = ['foo','bar','baz']; // local client handled, avert
+
+window.onload = function () {
+  registerLinks();
+  // registerTriggers() // radio toggle
+  
+  // console.log('page path',  document.pagePath) // old path for diff // undef onload
+}
+
+var registerLinks = function () {
+  var links = toArray(selectAll(document, 'a'));
+  links.forEach(link => {
+    var page = link.href.substring(link.href.lastIndexOf('=') +1);
+    if (local.indexOf(page) > -1) {
+      link.onclick = function (e) {
+        history.pushState({}, '', link.href);
+        window.dispatchEvent(new Event('pathchange'));
+        // pushPath(link.href);
+        document.pagePath = link.href;
+        
+        e.preventDefault();
+        // return false;
+        // console.log(link.href)
+      }
+    }
+  });
+};
+
+
+window.onpopstate = function (e) {
+  window.dispatchEvent(new Event('pathchange'));
+};
+
+
+// We need an IE 9 polyfill for our 'pathchange', polling at 50ms
+// also, if !pushState ... how to update location with out page refresh !!!
+
+window.addEventListener('pathchange', function(e) {
+  console.log('pathchange', window.location)
+  // console.log('page path', document.pagePath) // previous path for diff
+});
+
+var pushPath = function (path) {
+  // if path !== document.pagePath
+  history.pushState({}, '', path); // window.history.pushState(null, null, href)
+  window.dispatchEvent(new Event('pathchange'));
+}
+
+
+// The idea is
+
+// Every time the location changes, via 'pushstate' 'popstate' and 'window.load' events,
+// we grab the state of 'location.path' (compare to previous) and lookup the view state via 'states'
+
+// We then run a sweep on the document source (body for IE) and populate tokens
+// and update attribute values
+
+// If we limit the scope of updates (eg title) we can optimize the sweep better
+
+// Or we can run 'node.attributes' attribute.value.indexOf('{{') to test for tokens
+
+// We might want to modify our main traverse method towards this approach as well ???
+
+// ...
+// Window load always acts as a 'pathchange' since we will lose 'document.pagePath'
+// even on a simple page refresh
+
+// So here we need to know if the page was assembled (rendered) on the server
+// or if we need to do it on the client
+
+
+</script>
+<body>
+  <ul>
+    <li><a href="http://127.0.0.1:8887/tests/test2.html?page=foo">foo</a></li>
+    <li><a href="http://127.0.0.1:8887/tests/test2.html?page=bar">bar</a></li>
+    <li><a href="http://127.0.0.1:8887/tests/test2.html?page=baz">baz</a></li>
+    <li><a href="http://127.0.0.1:8887/tests/test2.html?page=bob">bob</a></li>
+  </ul>
+  <!--
+  <data as="foo">
+    [
+      {"bar":"one","baz":"alpha","bob":"gold"},
+      {"bar":"two","baz":"omega","bob":"silver"}
+    ]
+  </data>
+  
+  <data as="fizz">
+    "false"
+  </data>
+  
+  <view as="oop">foo</view>
+  
+  <p test="boop" case="boop">This should show up for test case.</p>
+  
+  <div>
+    <p bind="foo" data-foo="bar" data-fiz:baz="fluffy" key="barx">
+      this is foo {{foo}} {{fiz:baz}}
+      <span key="bar">pizza</span>
+      <span key="baz">coffee</span>
+      <span>{{bob}}</span>
+    </p>
+    <div view=" " data-zing="java">this is just a div</div>
+  </div>
+  
+  <div test="fizz">
+    <span case="burp">This is burp case</span>
+    <span case="false">This is false case</span>
+  </div>
+  -->
+</body>
+</html>

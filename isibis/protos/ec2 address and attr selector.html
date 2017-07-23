@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<title>Link Test</title>
+<script>
+
+window.onload = function () {
+  // 'rel', 'type', 'href', 'alias|id' => use 'alias' or 'as' to allow get/set definition, 'bind'
+  var links = document.querySelectorAll('link[rel=get]');
+  
+  var props = {
+    'href': { // can we override 'href' in all target browsers ???
+      set: function(value) {
+        // this.href = value;
+        this.setAttribute('href', value);
+        // update ibis data, call register (pub/sub)
+      },
+      get: function() {
+        // return this.href; // get <base> for free
+        return this.getAttribute('href');
+      }
+    },
+    'isibis': {
+      value: true
+    }
+  };
+      
+  for (var i = 0, link; i < links.length; i ++) {
+    link = links.item(i);
+    link.url = link.href;
+    //Object.defineProperties(link, props);
+  }
+  
+  console.log(links[0].url);
+  links[0].url = 'foo';
+  console.log(links[0].url);
+};
+
+</script>
+
+<base href="http://54.191.105.177">
+<link rel="get" href="doc.json" type="json" alias="doc" id="doc">
+
+</head>
+<body>
+  
+</body>
+</html>

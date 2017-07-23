@@ -1,0 +1,23 @@
+
+
+// links ...
+
+not primary choice, but most used
+https://www.npmjs.com/package/htmlparser2  //  perf tests too
+https://github.com/fb55/htmlparser2/wiki/Parser-options
+
+just the parser ma'am
+parse5
+https://www.npmjs.com/package/parse5
+wiki
+http://inikulin.github.io/parse5/
+playground
+http://astexplorer.net/#/1CHlCXc4n4
+
+
+
+htmlparser2
+https://www.npmjs.com/package/htmlparser2
+
+
+

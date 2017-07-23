@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+window.onload = function() {
+  var json = document.querySelector('data');
+  var data = JSON.parse(json.textContent);
+
+  var html = document.querySelector('view').childNodes;
+  
+  var frag = document.createDocumentFragment();
+  
+  for (var i = 0; i < html.length; i ++) {
+    frag.appendChild(html.item(i));
+  }
+  
+  var view = document.querySelector('[view]');
+  var attr = view.getAttribute('view');
+
+  view.appendChild(frag);
+  
+  // populate view from data
+};
+
+</script>
+</head>
+<body>
+
+<data as="links" type="json">
+  [
+    {
+      "link": "http://www.google.com",
+      "label": "Google"
+    },
+    {
+      "link": "http://www.yahoo.com",
+      "label": "Yahoo"
+    }
+  ]
+</data>
+
+<view as="link" type="html">
+  <li><a href="{{link}}" key="label">foo</a></li>
+</view>
+
+<ul view="link" wrap="inner" bind="menu"></ul>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>ibis load and script tests</title>
+<script id="src" src="alertA.js"></script>
+<script>
+
+// swap javascript via src attribute on the fly
+// does NOT work
+// could swap out child element instead
+
+// do similar test with CSS link href
+
+
+window.onload = function() {
+  
+  var src = document.getElementById('src');
+  // src.setAttribute('src', 'alertB.js');
+  src.src = 'alertB.js'
+  console.log(document.documentElement.innerHTML)
+};
+
+
+</script>
+</head>
+<body>
+  <p>This is a paragraph</p>
+</body>
+</html>

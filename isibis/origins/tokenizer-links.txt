@@ -1,0 +1,68 @@
+
+
+
+NON-NODE RESOURCES...
+
+John Resig -- Pure JavaScript HTML Parser
+http://ejohn.org/blog/pure-javascript-html-parser/
+http://ejohn.org/files/htmlparser.js
+
+Hand-written lexer in Javascript compared to the regex-based ones
+http://eli.thegreenplace.net/2013/07/16/hand-written-lexer-in-javascript-compared-to-the-regex-based-ones
+
+
+
+
+NPM SEARCH...
+https://www.npmjs.com/search?q=html%20token&page=1&ranking=optimal
+
+
+MORE USED...
+
+parse5 (WOW)
+https://www.npmjs.com/package/parse5
+https://github.com/inikulin/parse5
+
+
+simple-html-tokenizer
+https://www.npmjs.com/package/simple-html-tokenizer
+https://github.com/tildeio/simple-html-tokenizer/blob/master/src/evented-tokenizer.js
+
+html-tokenize
+https://www.npmjs.com/package/html-tokenize
+https://github.com/substack/html-tokenize/blob/master/index.js
+
+Parse a HTML String with JS (NOT ACCEPTED COMMENT)
+http://stackoverflow.com/questions/10585029/parse-a-html-string-with-js
+[MORE]
+http://stackoverflow.com/questions/9250545/javascript-domparser-access-innerhtml-and-other-properties
+
+
+LESS USED...
+
+html-tokenizer
+https://www.npmjs.com/package/html-tokenizer
+
+tokenize-html
+https://www.npmjs.com/package/tokenize-html
+
+tokenize-htmltext
+https://www.npmjs.com/package/tokenize-htmltext
+
+html-lexer
+https://www.npmjs.com/package/html-lexer
+https://github.com/alwinb/html-lexer/blob/master/lib/html.js
+
+
+
+
+TANGENTIAL...
+
+html-select
+https://www.npmjs.com/package/html-select
+
+html-decoder
+https://www.npmjs.com/package/html-decoder
+
+
+

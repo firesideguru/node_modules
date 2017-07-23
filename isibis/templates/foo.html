@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<title key="page.title">{{page.title}}</title>
+<style type="text/css">
+trigger {
+  cursor: pointer;
+}
+</style>
+<script src="ibis.js" defer></script>
+
+<link rel="get" href="http://54.191.105.177/doc.json" type="json" alias="doc" id="doc">
+
+</head>
+<body>
+  
+  <data bind="doc.page1" as="page" id="page"></data>
+  <trigger for="page" attr="bind" value="doc.page1" radio="pages">Page 1</trigger>
+  <trigger for="page" attr="bind" value="doc.page2" radio="pages">Page 2</trigger>
+  
+  <div bind="page.content" ns="foo" repeat="inner">
+    <p key="para">{{foo.para}}</p>
+  </div>
+  
+</body>
+</html>

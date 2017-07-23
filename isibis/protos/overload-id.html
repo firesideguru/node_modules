@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<title>overload id attribute</title>
+<script>
+
+window.onload = function () {
+  var views = document.querySelectorAll('input'); // 'view'
+  for (var i = 0, view; i < views.length; i ++) {
+    view = views.item(i);
+    Object.defineProperty(view, 'id', { // overload id with custom getter/setter and it still works in Chrome
+      configurable: true,
+      enumerable: true,
+      get: function () {
+        // return this.id; // endless loop
+        return this.getAttribute('id');
+      },
+      set: function (value) {
+        console.log('new id set:', value)
+        // this.id = value; // endless loop
+        this.setAttribute('id', value);
+      }
+    });
+  }
+  
+  var v = views.item(0);
+  console.log('radio id:', v.id)
+  // console.log(v)
+  v.id = 'bar'
+  // console.log(v)
+  // var x = document.getElementById('bar')
+  // console.log(x)
+  // x.id = 'pink'
+};
+
+
+
+
+</script>
+<body>
+  <!--
+  <view id="foo">I am a foo paragraph</view>
+  <view>anonymous view</view>
+  -->
+  <label for="bar">I am label</label>
+  <input type="radio" id="foo" name="fizz" onclick="document.querySelector('input').id = 'bob'">
+  <input type="radio" id="baz" name="fizz" onclick="document.querySelector('input').id = 'bar'">
+  
+  <br>
+  <!--
+  <a href="http://www.google.com"><a href="http://www.yahoo.com">go to Yahoo</a></a>
+  -->
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<title>CSSStyleSheet Play</title>
+<style type="text/css">
+body {
+  background: yellow!important;
+}
+</style>
+<script>
+
+var setup = (function() {
+  
+  // https://davidwalsh.name/add-rules-stylesheets
+  
+  var script = document.currentScript || (function() {
+    var scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1];
+  })();
+  
+  var style = document.createElement('style');
+  style.appendChild(document.createTextNode(''));
+  script.parentNode.insertBefore(style, script);
+  
+  style.id = 'ibis-style';
+  var sheet = document.styleSheets['ibis-style'];
+  
+  function addCSSRule(sheet, selector, rules, index) {
+    if ('insertRule' in sheet) {
+      sheet.insertRule(selector + '{' + rules + '}', index);
+    }
+    else if ('addRule' in sheet) { // IE < 9
+      sheet.addRule(selector, rules, index);
+    }
+  }
+  
+  var index = function() {
+    return sheet.cssRules.length || 0;
+  }
+  
+  addCSSRule(sheet, 'data', 'display: none', index());
+  addCSSRule(sheet, 'view', 'display: none', index());
+  addCSSRule(sheet, 'trigger', 'cursor: pointer', index());
+  addCSSRule(sheet, 'body', 'background: blue', index());
+  
+})();
+
+window.onload = function() {
+  
+  var data = document.querySelector('data');
+
+};
+
+</script>
+</head>
+<body>
+  
+  <data>This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. This is a data tag. </data>
+  
+</body>
+</html>

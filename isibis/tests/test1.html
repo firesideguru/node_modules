@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<title>test 1</title>
+<script src="../source/shared.js"></script>
+<script src="../source/styles.js"></script>
+<script src="../source/data.js"></script>
+<script src="../source/view.js"></script>
+<script src="../source/traverse.js"></script>
+<script src="../source/trigger.js"></script>
+<script>
+
+// testing ...
+
+// var foo = [
+//   {bar: 'one', baz: 'alpha', bob: 'gold'},
+//   {bar: 'two', baz: 'omega', bob: 'silver'}
+// ];
+
+// console.log(JSON.stringify(foo))
+
+// registerBindData('foo', foo)
+
+
+window.onload = function () {
+  // var bind = toArray(selectAll('[bind]'))[0];
+
+}
+
+// registerViewHtml('foo', 'bar')
+// console.log(viewHtml['foo'])
+
+</script>
+<body>
+  <data as="foo">
+    [
+      {"bar":"one","baz":"alpha","bob":"gold"},
+      {"bar":"two","baz":"omega","bob":"silver"}
+    ]
+  </data>
+  
+  <data as="fizz">
+    "false"
+  </data>
+  
+  <view as="oop">foo</view>
+  
+  <p test="boop" case="boop">This should show up for test case.</p>
+  
+  <div>
+    <p bind="foo" data-foo="bar" data-fiz:baz="fluffy" key="barx">
+      this is foo {{foo}} {{fiz:baz}}
+      <span key="bar">pizza</span>
+      <span key="baz">coffee</span>
+      <span>{{bob}}</span>
+    </p>
+    <div view=" " data-zing="java">this is just a div</div>
+  </div>
+  
+  <div test="fizz">
+    <span case="burp">This is burp case</span>
+    <span case="false">This is false case</span>
+  </div>
+</body>
+</html>

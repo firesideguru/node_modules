@@ -1,0 +1,67 @@
+Elevator Pitch
+
+Ibis is a templating system for html.
+
+Templating systems decouple page content (like textual content) from page display components (like list and paragraph formatting).
+They allow desired display components be reusable with different content and sharable across any (all) pages on the site.
+
+Each source of content or display component then has a single point of truth, a single place to update, "design once, use repeatedly throughout the site."
+This makes updates simple and less error prone (missing one occurance of that content), and a single update will be reflected on every page where that resource is used.
+
+Templating systems can also decouple designers and coders.
+
+This allows individuals, teams, or a single individual working on both, to move forward with their end of the project with minimal bottleneck from the other areas of the project. Even a single person developing an both ends benefits when they are waiting for the client to deliver needed content or approve a specific layout. This has the potential to greatly increase productivity in many common situations.
+
+There is, however, a downside.
+By decoupling content and design, and factoring out pieces of the design to be reusable across multiple pages, a certain amount of conceptual overhead is introduced.
+
+Site architects have to juggle more pieces when puting the site together, designers have to imagine what the content is like that might go in their layout (often true anyway), content providers might feel disconnected from the context of the content, coders have to give up some of their control to designers, and project managers have to facilitate and coordinate better communication between smaller groups working more independantly on the larger project.
+In my experience the site architect juggling and conceptualizing more pieces to deliver a whole product is the most challenging new overhead in most cases.
+
+
+Ibis is unique in the saturated templating system landscape in its own right, and also helps with some of the conceptual overhead mentioned above.
+
+Ibis is unique in that most systems are created by coders (developers) for coders, with disigner learnability and usability as an afterthought, if at all--most coders should not be designing web pages, IMO. And many systems do not comply well with html standards in the source code output they produce (I'm looking at you Wordpress).
+
+Ibis places designer learnability and usability as a primary goal.
+
+With ibis the directives are html syntax and the output is whatever html source the designer wrote, nearly verbatim, after repetition transforms and content injection has been applied.
+
+Using html syntax ibis exposes functionality for designers to specify content directly on the page, or seperate imported pages, not using a database, and inject that content into their designs. This is useful for mockups or simple public facing sites where including a database or server-side developer or team is not neccessary. However, by simply changing one or two html attributes, or changing what response is returned from the server, at any time any database content or dynamically generated resources can replace the static content pages.
+
+By definition ibis is a domain specific language, and that domain is html. Html is a declarative--describing the outcome without having to define how that outcome is ahcieved--markup language that already provides some dynamic content features since HTML5, and ibis empowers html to be completely dynamic without breaking the existing paradigm that is familiar to designers. Even so, it can be used as a "full stack" system that includes server features and offers flexibility to server-side developers in a manner that is agnostic as to what approach, language, and database they want to use.
+
+Ibis also provides a server version (currently nodejs) that can assemble pages before being delivered to the browser client. These pages can stand alone as static html pages or be a starting point for dynamic updates and creating single page web apps. You can map any specific page to be assembled on the server or client on a case by case basis.
+
+Ibis offers a lot of flexibility and best practices, like link deduping on imported content, without having to write custom code. Ibis supports sepearation of concerns--not mixing non-display logic in the display environment--and offers the features necessary to develop non-trivial websites. Ibis also works hand in glove with custom scripts to update or change content layout--it stays out of the way.
+
+--include reusable components or dependancies which themselves can have dependancies, etc...
+
+--load and display parts of the page without reloading the entire page (single page app)
+
+--conditionally load or show and hide content and parts of the page based on the current state of data (logged in?)
+
+--incorporte common and custom content and atlernate html markup with little effort
+
+--save the changed state of a page back to the server (much like web forms but with more flexiblity) when such features like reordering lists or updating content are provided to the user (for now through 3rd party tools, of which many exist)
+
+--assemble template pages and content data on the server (for older browsers, or to optimize assembly time) or the client browser or a combination of both)
+
+--plays well with html editors, using only html syntax it is valid html
+
+--enhances and maps to valid vanilla html links and url addresses in the location bar
+
+--so browsers without modern functionality can still get the same content directly from the server and modern browsers get faster loading times and a more desktop app like experience, and does not break the user experience of expected back and forward button navigation
+
+--links can target a base shared template layout which itself can load unique page content and design components (like widgets and articles) into slots in the layout [OR]
+
+--links can target unique page content templates which can import the larger shared template layout for that content
+
+--this allows flexibility for different ways of conceptualizing site architecture and page/content relationships depending on cognitive style and site architecture style
+
+** some of these features do require programming or configuration on the server
+
+
+
+
+
