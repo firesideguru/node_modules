@@ -1,0 +1,20 @@
+
+
+srcLogin:
+  host: local
+
+srcLogin: local
+
+
+dstLogin:
+  host: '52.20.143.110',
+  port: 22,
+  username: 'ubuntu',
+  privateKey: certs/ibis.pem
+
+srcPath: /home/ubuntu/public
+dstPath: /home/chronos/user/Downloads/gisnanigans/publish
+  
+ignore:
+  - node_modules
+  - .gitignore
